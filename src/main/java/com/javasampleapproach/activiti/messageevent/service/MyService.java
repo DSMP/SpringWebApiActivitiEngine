@@ -1,5 +1,6 @@
 package com.javasampleapproach.activiti.messageevent.service;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,20 +37,13 @@ public class MyService {
 
 	public void completeTask(String taskId) {
 		List<Task> tasks = taskService.createTaskQuery().list();
-
-		taskService.complete(taskId);
-		if(tasks.size() > 0)
-		{
-//			int i = 0;
-//			for (Task item: tasks) {
-//				if (!item.getId().equals((taskId)))
-//				{
-//					break;
-//				}
-//				i++;
-//			}
-			tasks.remove(0);
+		Task task = null;
+		for (Task item: tasks) {
+			if (item.getId().equals(taskId))
+				task = item;
 		}
+		System.out.println(task);
+		taskService.complete(taskId);
 	}
 
 }
