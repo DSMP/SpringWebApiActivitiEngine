@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="NBP_PROCESS" isExecutable="true">
+    <startEvent id="sid-C6BA8758-1687-45A5-BD8B-B63573B51C5C"></startEvent>
+    <userTask id="sid-14FE9AC7-C2B5-40AC-8730-8DF36711E6C0" name="Pobierz waluty z datami do 93 dni" activiti:resultVariableName="waluty z 93 dni"></userTask>
+    <sequenceFlow id="sid-5A6734FC-7C6E-4A76-905D-71F1ADCA6EB1" sourceRef="sid-C6BA8758-1687-45A5-BD8B-B63573B51C5C" targetRef="sid-14FE9AC7-C2B5-40AC-8730-8DF36711E6C0"></sequenceFlow>
+    <userTask id="sid-63B97F4D-D9C3-4220-AB38-C3B9410190E2" name="Wyodrebnij daty z walut" activiti:class="SaveDates" activiti:resultVariableName="daty"></userTask>
+    <sequenceFlow id="sid-661E4E93-567B-4FD6-9C93-BCFCAE1F2A59" sourceRef="sid-14FE9AC7-C2B5-40AC-8730-8DF36711E6C0" targetRef="sid-63B97F4D-D9C3-4220-AB38-C3B9410190E2"></sequenceFlow>
+    <userTask id="sid-81593D32-E781-432A-AF69-CA305870A268" name="Wyswietl pobrane dane" activiti:class="WyswietlDane" activiti:resultVariableName="wyswietldane"></userTask>
+    <sequenceFlow id="sid-477DC109-23E8-4B44-AAC3-B3907B0525CB" sourceRef="sid-63B97F4D-D9C3-4220-AB38-C3B9410190E2" targetRef="sid-81593D32-E781-432A-AF69-CA305870A268"></sequenceFlow>
+    <userTask id="sid-74D5BE15-7C04-4799-A755-063EF2C13310" name="Podejmij wybór"></userTask>
+    <sequenceFlow id="sid-75E06D0B-3C06-4432-8C08-205B56B2578F" sourceRef="sid-81593D32-E781-432A-AF69-CA305870A268" targetRef="sid-74D5BE15-7C04-4799-A755-063EF2C13310"></sequenceFlow>
+    <endEvent id="sid-F32D5F4F-693E-4D02-952E-7BF31B5F4B73"></endEvent>
+    <sequenceFlow id="sid-10075D07-3272-46D2-A1C4-6448FFBBBFF9" sourceRef="sid-74D5BE15-7C04-4799-A755-063EF2C13310" targetRef="sid-F32D5F4F-693E-4D02-952E-7BF31B5F4B73"></sequenceFlow>
+    <userTask id="sid-5DC4FEBB-9F15-408F-9E23-45816DDC25C2" name="User wybral date" activiti:assignee="kermit"></userTask>
+    <sequenceFlow id="sid-D403B6DC-9050-4646-B5F8-395762A1F1EE" sourceRef="sid-74D5BE15-7C04-4799-A755-063EF2C13310" targetRef="sid-5DC4FEBB-9F15-408F-9E23-45816DDC25C2"></sequenceFlow>
+    <userTask id="sid-E72B70B7-0B5E-4C38-B253-12555DEE727A" name="User zapisuje dane do pliku" activiti:assignee="kermit"></userTask>
+    <sequenceFlow id="sid-8DE5BC23-24D1-4BA4-84D5-5D4FDA1D08BC" sourceRef="sid-74D5BE15-7C04-4799-A755-063EF2C13310" targetRef="sid-E72B70B7-0B5E-4C38-B253-12555DEE727A"></sequenceFlow>
+    <userTask id="sid-7254868A-5B9D-4185-A02F-716328FD17B7" name="Zapis danych do pliku" activiti:class="ZapiszDoPliku" activiti:resultVariableName="zapisz"></userTask>
+    <sequenceFlow id="sid-8A54DCDD-B6D5-48FE-B5D1-E8B2F7C327F4" sourceRef="sid-E72B70B7-0B5E-4C38-B253-12555DEE727A" targetRef="sid-7254868A-5B9D-4185-A02F-716328FD17B7"></sequenceFlow>
+    <sequenceFlow id="sid-04E58C65-6AAF-413F-8061-FAEA1248B501" sourceRef="sid-7254868A-5B9D-4185-A02F-716328FD17B7" targetRef="sid-81593D32-E781-432A-AF69-CA305870A268"></sequenceFlow>
+    <userTask id="sid-4EC4387E-542F-4362-B22E-D6B83459C2DD" name="Pobierz kursy dla wybranej waluty" activiti:resultVariableName="Kursy"></userTask>
+    <sequenceFlow id="sid-8EFF5D32-9D26-43DD-8384-22A2DC5573FF" sourceRef="sid-5DC4FEBB-9F15-408F-9E23-45816DDC25C2" targetRef="sid-4EC4387E-542F-4362-B22E-D6B83459C2DD"></sequenceFlow>
+    <sequenceFlow id="sid-CE3FE1F1-761E-4FEB-BC88-DAFA25BD9139" sourceRef="sid-4EC4387E-542F-4362-B22E-D6B83459C2DD" targetRef="sid-81593D32-E781-432A-AF69-CA305870A268"></sequenceFlow>
+  </process>
+</definitions>

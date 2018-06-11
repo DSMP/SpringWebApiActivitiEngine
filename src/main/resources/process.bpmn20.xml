@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:activiti="http://activiti.org/bpmn" targetNamespace="Examples">
+
+	<message id="message_one" name="messageOne" />
+	<message id="message_two" name="messageTwo" />
+
+	<process id="simpleProcess" name="Simple Process">
+		<startEvent id="start_one">
+			<messageEventDefinition messageRef="message_one" />
+		</startEvent>
+		<sequenceFlow sourceRef="start_one" targetRef="theTask" />
+
+		<userTask id="theTask" name="Task" activiti:assignee="${person}">
+			<documentation>
+				Do the task.
+			</documentation>
+		</userTask>
+		<sequenceFlow sourceRef="theTask" targetRef="exclusiveGw" />
+
+		<startEvent id="start_two">
+			<messageEventDefinition messageRef="message_two" />
+		</startEvent>
+		<sequenceFlow sourceRef="start_two" targetRef="exclusiveGw" />
+
+		<exclusiveGateway id="exclusiveGw" name="Exclusive Gateway" />
+		<sequenceFlow sourceRef="exclusiveGw" targetRef="notification"></sequenceFlow>
+
+		<scriptTask id="notification" name="Finish Notification"
+			scriptFormat="groovy">
+			<script>
+				println 'finish Process, started by ' + message
+			</script>
+		</scriptTask>
+		<sequenceFlow sourceRef="notification" targetRef="theEnd" />
+
+		<endEvent id="theEnd" />
+	</process>
+
+</definitions>
