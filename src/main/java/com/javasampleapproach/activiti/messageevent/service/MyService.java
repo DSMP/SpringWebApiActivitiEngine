@@ -36,15 +36,20 @@ public class MyService {
 
 	public void completeTask(String taskId) {
 		List<Task> tasks = taskService.createTaskQuery().list();
-		Task task = null;
-		for (Task item: tasks) {
-			if (!item.getId().equals((taskId)))
-			{
-				task = item;
-			}
-		}
-		tasks.remove(task);
+
 		taskService.complete(taskId);
+		if(tasks.size() > 0)
+		{
+//			int i = 0;
+//			for (Task item: tasks) {
+//				if (!item.getId().equals((taskId)))
+//				{
+//					break;
+//				}
+//				i++;
+//			}
+			tasks.remove(0);
+		}
 	}
 
 }
